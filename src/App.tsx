@@ -5,7 +5,7 @@ import NavigationBar from './components/NavigationBar';
 import ProgressBar from './components/ProgressBar';
 import { useAudio } from './hooks/useAudio';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faPause, faVolumeHigh, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faVolumeHigh, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 
 const TOTAL_STEPS = 11;
 

@@ -30,7 +30,6 @@ const audioFiles: AudioMap = {
 
 const audioInstances: { [key: string]: HTMLAudioElement } = {};
 let isMuted = false;
-let currentAudioStep: number | null = null;
 let currentTimeEvents: AudioTimeEvent[] = [];
 let onTimeEventCallback: ((action: string) => void) | null = null;
 
@@ -73,7 +72,6 @@ export const useAudio = () => {
 
       if (type === 'narration' && stepNumber) {
         audioPath = getNarrationPath(stepNumber);
-        currentAudioStep = stepNumber;
         currentTimeEvents = [...(audioTimeEvents[stepNumber] || [])];
       } else if (type in audioFiles) {
         audioPath = audioFiles[type as keyof AudioMap];
@@ -158,7 +156,6 @@ export const useAudio = () => {
   };
 
   const setCurrentStep = (step: number) => {
-    currentAudioStep = step;
     currentTimeEvents = [...(audioTimeEvents[step] || [])];
   };
 

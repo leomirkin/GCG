@@ -15,7 +15,6 @@ import {
   faBan,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
-import { useAudio } from '../hooks/useAudio';
 import ResourceTree from './ResourceTree';
 
 const getTitleForStep = (step: number): string => {
