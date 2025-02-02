@@ -73,44 +73,18 @@ const ComunicadosTable = () => (
 interface TutorialStepProps {
   step: number;
   onStepChange: (step: number) => void;
+  highlightedSection: string | null;
+  onPlayEffect: (type: 'sistemdata' | 'teleport') => void;
 }
 
-const TutorialStep: React.FC<TutorialStepProps> = ({ step, onStepChange }) => {
-  const { playAudio, stopAllAudio } = useAudio();
+const TutorialStep: React.FC<TutorialStepProps> = ({ 
+  step, 
+  onStepChange, 
+  highlightedSection,
+  onPlayEffect 
+}) => {
   const [isTreeBouncing, setIsTreeBouncing] = useState(false);
   const [referencesPanelOpen, setReferencesPanelOpen] = useState(false);
-
-  // Efecto para manejar las narraciones
-  useEffect(() => {
-    let narrationAudio: HTMLAudioElement | null = null;
-    
-    const playStepNarration = async () => {
-      // Detener todos los audios anteriores
-      stopAllAudio();
-      
-      // Intentar reproducir la narración del paso actual
-      narrationAudio = await playAudio('narration', step);
-    };
-
-    playStepNarration();
-
-    // Cleanup: detener la narración cuando el componente se desmonte
-    // o cuando cambie el paso
-    return () => {
-      if (narrationAudio) {
-        narrationAudio.pause();
-        narrationAudio.currentTime = 0;
-      }
-    };
-  }, [step, playAudio, stopAllAudio]);
-
-  // Función para manejar el cambio de paso con sonido
-  const handleStepChange = (newStep: number) => {
-    // Reproducir el sonido sin esperar a que termine
-    playAudio('teleport');
-    // Cambiar el paso inmediatamente
-    onStepChange(newStep);
-  };
 
   useEffect(() => {
     if (isTreeBouncing) {
@@ -118,6 +92,12 @@ const TutorialStep: React.FC<TutorialStepProps> = ({ step, onStepChange }) => {
       return () => clearTimeout(timer);
     }
   }, [isTreeBouncing]);
+
+  // Función para manejar el cambio de paso con sonido
+  const handleStepChange = (newStep: number) => {
+    onPlayEffect('teleport');
+    onStepChange(newStep);
+  };
 
   return (
     <div className="tutorial-step">
@@ -149,14 +129,14 @@ const TutorialStep: React.FC<TutorialStepProps> = ({ step, onStepChange }) => {
                   </select>
                   <button 
                     className="refresh-button" 
-                    onClick={() => playAudio('sistemdata')}
+                    onClick={() => onPlayEffect('sistemdata')}
                   >
                     <FontAwesomeIcon icon={faRotate} className="icon" />
                   </button>
                 </div>
               </div>
 
-              <div className="status-section">
+              <div className={`status-section ${highlightedSection === 'status' ? 'highlight-bounce' : ''}`}>
                 <h3 className="section-title">ESTADOS SOLICITUDES</h3>
                 <div className="status-cards">
                   <div className="status-card pending">
@@ -301,7 +281,6 @@ const TutorialStep: React.FC<TutorialStepProps> = ({ step, onStepChange }) => {
         </div>
       </div>
       
-      {/* Modal de referencias */}
       {referencesPanelOpen && (
         <div className="modal-overlay">
           <div className="modal-content references-modal">

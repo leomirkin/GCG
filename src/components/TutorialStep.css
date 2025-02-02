@@ -105,7 +105,7 @@
 
 .refresh-button {
   padding: 8px 16px;
-  background: #6c7ae0;
+  background: #a3db24;
   color: white;
   border: none;
   border-radius: 4px;
@@ -121,6 +121,10 @@
   color: white;
 }
 
+.refresh-button:hover {
+  background: #94c721;
+}
+
 .status-section {
   background: white;
   padding: 30px;
@@ -128,6 +132,8 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   margin-bottom: 20px;
   animation-delay: 0.2s;
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
 }
 
 .section-title {
@@ -265,7 +271,7 @@
   padding: 12px 30px;
   border: none;
   border-radius: 25px;
-  background: #82b440;
+  background: #a3db24;
   color: white;
   cursor: pointer;
   font-weight: 500;
@@ -277,6 +283,10 @@
   background: rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.5);
   cursor: not-allowed;
+}
+
+.nav-button:hover {
+  background: #94c721;
 }
 
 .placeholder-content {
@@ -975,4 +985,74 @@
   animation: smoothRise 0.5s ease-out forwards;
   opacity: 0;
   animation-delay: calc(var(--item-index, 0) * 0.1s);
+}
+
+/* Efecto de highlight para la sección de estados */
+@keyframes highlightStatus {
+  0% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(163, 219, 36, 0);
+  }
+  50% { 
+    transform: scale(1.03);
+    box-shadow: 0 0 35px rgba(163, 219, 36, 0.8);
+  }
+  100% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(163, 219, 36, 0);
+  }
+}
+
+.status-section.highlight-bounce {
+  animation: highlightStatus 1s ease-in-out;
+  transition: all 0.2s ease;
+  will-change: transform, box-shadow;
+  position: relative;
+  z-index: 1;
+}
+
+/* Actualizar colores corporativos */
+.app-header h1,
+.start-content h1 {
+  color: #a3db24;
+}
+
+.loading-content h1 {
+  color: #a3db24;
+}
+
+.disclaimer a {
+  color: #a3db24;
+}
+
+.start-button {
+  background: #a3db24;
+}
+
+.start-button:hover {
+  background: #94c721;
+}
+
+/* Ajustar el color del spinner de carga */
+.loading-spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #a3db24;
+}
+
+/* Actualizar el color del botón de audio */
+.audio-toggle {
+  background: rgba(163, 219, 36, 0.9);
+}
+
+.audio-toggle:hover {
+  background: rgba(163, 219, 36, 1);
+}
+
+/* Actualizar el color del botón de refresh */
+.refresh-button {
+  background: #a3db24;
+}
+
+.refresh-button:hover {
+  background: #94c721;
 } 
