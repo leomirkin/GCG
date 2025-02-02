@@ -1,0 +1,53 @@
+.navigation-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(40, 44, 52, 0.95);
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+.nav-button {
+  min-width: 120px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.nav-button:hover {
+  transform: translateY(-2px);
+}
+
+.nav-button.next {
+  background-color: #4CAF50;
+}
+
+.nav-button.previous {
+  background-color: #666;
+}
+
+.step-indicator {
+  color: white;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .navigation-bar {
+    padding: 0.8rem;
+    gap: 1rem;
+  }
+
+  .nav-button {
+    min-width: 100px;
+    padding: 0.6rem 1rem;
+  }
+} 
